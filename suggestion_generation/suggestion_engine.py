@@ -45,7 +45,6 @@ class SuggestionEngine:
 
 
     def load_feedback(self, feedback, source_column, text_column, cross_dataset_preprocess):
-
         self.feedback = pd.DataFrame({'feedback_id': feedback[source_column].to_list(), 'feedback_text': feedback[text_column].to_list()})
         if cross_dataset_preprocess == True:
             self.feedback = resource_preprocessing.cross_dataset_preprocessing(self.feedback, 'feedback_text', 'feedback_id')
