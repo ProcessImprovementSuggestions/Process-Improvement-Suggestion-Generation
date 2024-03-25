@@ -7,7 +7,7 @@ def tweet_date_range(corpus_data, date_column, date_range):
     corpus_data['created_at_clean'] = pd.to_datetime(corpus_data[date_column])
     corpus_data = corpus_data[(corpus_data.created_at_clean.dt.year > start_year) & (corpus_data.created_at_clean.dt.year < end_year)]
     corpus_data.reset_index(drop=True, inplace=True)
-    corpus_data.drop(columns=['created_at_clean'], inplace=True)
+    corpus_data = corpus_data.drop(columns=['created_at_clean'])
     return corpus_data
 
 def tweet_shuffle(corpus_data, frac, random_state):
@@ -21,7 +21,7 @@ def rm_links_handles(corpus_data, text_column):
     return corpus_data
 
 def cross_dataset_preprocessing(corpus_data, text_column, source_column):
-    corpus_data.drop(columns=corpus_data.columns.difference([source_column, text_column]), inplace=True)
+    corpus_data = corpus_data.drop(columns=corpus_data.columns.difference([source_column, text_column]))
     corpus_data.dropna(inplace=True)
     corpus_data.drop_duplicates(subset=[source_column], inplace=True)
     corpus_data[text_column] = corpus_data[text_column].str.strip()
