@@ -196,7 +196,7 @@ class SuggestionEngine:
         return improvement_suggestions
 
 
-    def suggestions_postprocessing(self):
+    def _suggestions_postprocessing(self):
         self.weakness_cluster_batch = self.weakness_cluster_batch.values.tolist()
         self.cluster_queries_batch = self.cluster_queries_batch.values.tolist()
 
@@ -232,7 +232,7 @@ class SuggestionEngine:
 
         self.cluster_queries_batch['suggestions'] = improvement_suggestions
         self.cluster_queries_batch['reranked'] = reranked_query_results
-        self.suggestions_postprocessing()
+        self._suggestions_postprocessing()
         return self.cluster_queries_batch, self.weakness_cluster_batch, self.feedback_weakness_batch
 
 
