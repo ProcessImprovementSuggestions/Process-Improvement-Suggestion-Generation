@@ -126,7 +126,7 @@ class SuggestionEngine:
         return self.weakness_cluster_batch
     
 
-    def queries_generation(self, cluster_max_size = 10):
+    def queries_generation(self, cluster_max_examples = 10):
         """For each cluster, generate a search query aimed at finding improvement suggestions that address the process weakness"""
 
         system_prompt = query_generation_template.get_system_prompt()
@@ -140,7 +140,7 @@ class SuggestionEngine:
 
         for cluster_i in clusters:
             if cluster_i != -1:
-                context = self._format_context(self.weakness_cluster_batch[self.weakness_cluster_batch['cluster']==cluster_i]['weakness'].to_list()[:cluster_max_size])
+                context = self._format_context(self.weakness_cluster_batch[self.weakness_cluster_batch['cluster']==cluster_i]['weakness'].to_list()[:cluster_max_examples])
                 response = self._zero_shot_response(user_prompt_template.format(texts=context), system_prompt)
                 try:
                     self.cluster_queries_batch.append([cluster_i, json.loads(response.choices[0].message.content)['search_query']])
