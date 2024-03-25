@@ -8,3 +8,5 @@ Process mining techniques play an important role for understanding, analyzing, a
 * ![platform](https://img.shields.io/badge/platform-linux-brightgreen)
 * ![GPU](https://img.shields.io/badge/GPU-Nvidia%20A10-red)
 * ![python](https://img.shields.io/badge/python-black?logo=python&label=3.11.5)
+
+You need a running *qdrant* service (see [documentation](https://qdrant.tech)) and a running *grobid* service (see [documentation](http://grobid.readthedocs.io/)) .
