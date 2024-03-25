@@ -109,7 +109,7 @@ class SuggestionEngine:
 
 
     def weaknesses_clustering(self, cluster_min_size = 1, cluster_threshold=0.75):
-        """Cluster the identified process weaknesses."""
+        """Clusters the identified process weaknesses."""
 
         self.weakness_cluster_batch['cluster'] = [-1 for _ in range(self.weakness_cluster_batch.shape[0])]
         corpus_weaknesses = self.weakness_cluster_batch["weakness"].tolist()
@@ -127,7 +127,7 @@ class SuggestionEngine:
     
 
     def queries_generation(self, cluster_max_examples = 10):
-        """For each cluster, generate a search query aimed at finding improvement suggestions that address the process weakness"""
+        """Generates, for each cluster, a search query aimed at finding improvement suggestions"""
 
         system_prompt = query_generation_template.get_system_prompt()
         user_prompt_template = query_generation_template.get_user_prompt_template()
@@ -222,6 +222,8 @@ class SuggestionEngine:
 
 
     def cluster_suggestion_generation(self, limit_results_retrieve, limit_results_rerank):
+        """Generates improvement suggestions for each cluster using knowledge resources"""
+        
         reranked_query_results = []
         improvement_suggestions = []
 
@@ -237,6 +239,8 @@ class SuggestionEngine:
 
 
     def feedback_answer_generation(self):
+        """Generates, for each feedback, an answer that merges the suggestions relevant for the feedback"""
+        
         system_prompt = answer_generation_template.get_system_prompt()
         user_prompt_template = answer_generation_template.get_user_prompt_template()
 
