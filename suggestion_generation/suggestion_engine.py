@@ -125,7 +125,7 @@ class SuggestionEngine:
         return self.weakness_cluster_batch
     
 
-    def queries_generation(self, cluster_max_examples = 10):
+    def cluster_query_generation(self, cluster_max_examples = 10):
         """Generates, for each cluster, a search query aimed at finding improvement suggestions"""
 
         system_prompt = query_generation_template.get_system_prompt()
