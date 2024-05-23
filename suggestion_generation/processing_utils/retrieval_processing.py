@@ -111,8 +111,10 @@ def get_paper_documents(query, qdrantdb_client, tldr_collection_name, embedder, 
 
 
 def search_web(query, service, GOOGLE_CSE_ID, limit_results):
-
     responses = []
+    links = []
+
+    query = f"{query} -filetype:pdf"
 
     for start_i in range(1,limit_results+1,10):
         res = service.cse().list(
@@ -122,8 +124,6 @@ def search_web(query, service, GOOGLE_CSE_ID, limit_results):
             start=start_i
         ).execute()
         responses.extend(res['items'])
-
-    links = []
 
     for result in responses:
         links.append(result['link'])
